@@ -1,23 +1,37 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { z } from "zod";
 import { monsters } from "./data";
-import { ApiError, Monster, MonsterWithHealth } from "./types";
+import {
+  ApiError,
+  Monster,
+  MonsterWithHealth,
+  monsterTypeSchema,
+} from "./types";
 
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Array<Monster> | ApiError>
 ) {
-  const {
-    query: { type },
-    method,
-  } = req;
-
-  if (method !== "GET") {
+  if (req.method !== "GET") {
     res.setHeader("Allow", ["GET"]);
     res.status(405).json({
-      error: { message: `Method ${method} Not Allowed` },
+      error: { message: `Method ${req.method} Not Allowed` },
     });
     return;
   }
+  const schema = z.object({
+    type: monsterTypeSchema.optional(),
+  });
+
+  const response = schema.safeParse(req.query);
+
+  if (!response.success) {
+    const { errors } = response.error;
+    res.status(400).json({ error: { message: "Invalid request", errors } });
+    return;
+  }
+
+  const { type } = response.data;
 
   const filteredMonsters = type
     ? monsters.filter((monster) => monster.type === type)
