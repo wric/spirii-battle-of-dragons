@@ -1,4 +1,4 @@
-import { Monster } from "@/pages/api/monsters";
+import { MonsterWithHealth } from "@/pages/api/monsters";
 import {
   Card,
   CardBody,
@@ -7,7 +7,7 @@ import {
   Text
 } from "@chakra-ui/react";
 
-export default function DragonCard({ dragon }: { dragon: Monster }) {
+export default function DragonCard({ dragon }: { dragon: MonsterWithHealth }) {
   return (
     <Card width="100%">
       <CardBody>
@@ -24,7 +24,7 @@ export default function DragonCard({ dragon }: { dragon: Monster }) {
         <Heading as="h5" size="xs" mt="1rem">
           Health
         </Heading>
-        <Text>100</Text>
+        <Text>{dragon.health}</Text>
         <Divider />
         <Heading as="h5" size="xs" mt="1rem">
           Size

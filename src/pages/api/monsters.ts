@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 type MonterType = "aberration" | "humanoid" | "dragon";
 
-export type Monster = {
+type Monster = {
   id: number;
   name: string;
   size: "Large" | "Medium" | "Huge";
@@ -10,7 +10,9 @@ export type Monster = {
   strength: number;
 };
 
-type ApiError = {
+export type MonsterWithHealth = Monster & { health: number };
+
+export type ApiError = {
   error: { message: string };
 };
 
@@ -28,14 +30,19 @@ export default function handler(
     res.status(405).json({
       error: { message: `Method ${method} Not Allowed` },
     });
-  }
-
-  if (type) {
-    res.status(200).json(monsters.filter((monster) => monster.type === type));
     return;
   }
 
-  res.status(200).json(monsters);
+  const filteredMonsters =
+    type !== ""
+      ? monsters.filter((monster) => monster.type === type)
+      : monsters;
+
+  const monstersWithHealth: Array<MonsterWithHealth> = filteredMonsters.map(
+    (monster) => ({ ...monster, health: 100 })
+  );
+
+  res.status(200).json(monstersWithHealth);
 }
 
 export const monsters: Array<Monster> = [

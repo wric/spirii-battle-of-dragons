@@ -1,11 +1,11 @@
-import { Monster } from "@/pages/api/monsters";
+import { MonsterWithHealth } from "@/pages/api/monsters";
 import { Select } from "@chakra-ui/react";
 
 export default function DragonSelect({
   dragons,
   onChange,
 }: {
-  dragons: Array<Monster>;
+  dragons: Array<MonsterWithHealth>;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }) {
   return (
