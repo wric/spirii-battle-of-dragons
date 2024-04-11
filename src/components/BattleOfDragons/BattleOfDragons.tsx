@@ -87,12 +87,13 @@ export default function BattleOfDragons() {
   };
 
   return (
-    <VStack padding="2rem">
+    <VStack padding="1rem">
       <HStack gap="2rem" mt="4rem" pb="2rem" align={"start"}>
         <VStack>
           <DragonSelect
             dragons={dragons}
             onChange={(e) => setDragon1(setDragon(e))}
+            isDisabled={winner !== null}
           ></DragonSelect>
           {dragon1 && <DragonCard dragon={dragon1} />}
         </VStack>
@@ -110,6 +111,7 @@ export default function BattleOfDragons() {
           <DragonSelect
             dragons={dragons}
             onChange={(e) => setDragon2(setDragon(e))}
+            isDisabled={winner !== null}
           ></DragonSelect>
           {dragon2 && <DragonCard dragon={dragon2} />}
         </VStack>
