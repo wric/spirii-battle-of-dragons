@@ -1,4 +1,4 @@
-import { MonsterWithHealth } from "@/pages/api/monsters";
+import { MonsterWithHealth } from "@/pages/api/monsters/types";
 import {
   Card,
   CardBody,

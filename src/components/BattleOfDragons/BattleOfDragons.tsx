@@ -1,11 +1,11 @@
-import fetcher from "@/lib/fetcher";
-import { MonsterWithHealth } from "@/pages/api/monsters";
+import { Fight, FightResult, FightWinner } from "@/pages/api/fight/types";
 import { Button, Code, HStack, Heading, Text, VStack } from "@chakra-ui/react";
 import { ChangeEvent, useState } from "react";
 import useSWR from "swr";
 import DragonCard from "../DragonCard/DragonCard";
 import DragonSelect from "../DragonSelect/DragonSelect";
-import { Fight, FightResult, FightWinner } from "@/pages/api/fight";
+import { fetcher } from "./lib";
+import { MonsterWithHealth } from "@/pages/api/monsters/types";
 
 export default function BattleOfDragons() {
   const { data, error, isLoading } = useSWR<Array<MonsterWithHealth>>(
