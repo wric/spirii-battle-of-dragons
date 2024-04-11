@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 type MonterType = "aberration" | "humanoid" | "dragon";
 
-type Monster = {
+export type Monster = {
   id: number;
   name: string;
   size: "Large" | "Medium" | "Huge";
