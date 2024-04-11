@@ -19,10 +19,9 @@ export default function handler(
     return;
   }
 
-  const filteredMonsters =
-    type !== ""
-      ? monsters.filter((monster) => monster.type === type)
-      : monsters;
+  const filteredMonsters = type
+    ? monsters.filter((monster) => monster.type === type)
+    : monsters;
 
   const monstersWithHealth: Array<MonsterWithHealth> = filteredMonsters.map(
     (monster) => ({ ...monster, health: 100 })
